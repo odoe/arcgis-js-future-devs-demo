@@ -1,18 +1,17 @@
-// src/components/GeoMap.jsx
 import { useEffect, useRef } from "react";
+
+async function loadMap(container) {
+    const { initialize } = await import("../data/mapping");
+    initialize(container);
+}
 
 export function GeoMap() {
     const mapRef = useRef();
 
-    async function loadMap(container) {
-        const { initialize } = await import("../data/mapping");
-        initialize(container);
-    }
-
     useEffect(() => {
-        if (mapRef.current) {
-            loadMap(mapRef.current);
-        }
+       if (mapRef.current) {
+           loadMap(mapRef.current);
+       } 
     }, [mapRef]);
 
     return (
